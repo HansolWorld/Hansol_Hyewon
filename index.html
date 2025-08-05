@@ -436,7 +436,7 @@
 
                 <script>
                     // ✅ 지도 중심 좌표
-                    var centerLatLng = new naver.maps.LatLng(37.56170714301528, 126.85306609567687);
+                    var centerLatLng = new naver.maps.LatLng(37.490967, 126.7249587);
 
                     // ✅ 지도 생성
                     var map = new naver.maps.Map('map', {
@@ -444,10 +444,20 @@
                         zoom: 16 // 확대 레벨
                     });
 
-                    // ✅ 마커 생성
+                    // 마커 생성
                     var marker = new naver.maps.Marker({
                         position: centerLatLng,
                         map: map
+                    });
+
+                    // ✅ 인포윈도우 생성 (장소 이름 보여주기)
+                    var infoWindow = new naver.maps.InfoWindow({
+                        content: '<div style="padding:10px;font-size:14px;">🏛 빌라드마리 웨딩홀</div>'
+                    });
+
+                    // 마커 클릭 시 인포윈도우 열기
+                    naver.maps.Event.addListener(marker, "click", function() {
+                        infoWindow.open(map, marker);
                     });
                 </script>
             <div class="wow fadeInUp section6-location p-3">
