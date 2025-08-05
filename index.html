@@ -56,7 +56,7 @@
         wow.init();
 
         $(document).ready(function() {
-            let date = new Date(2020, 10, 28);
+            let date = new Date(2025, 9, 19);
             let currentDate = new Date();
 
             let result = date - currentDate;
@@ -67,16 +67,28 @@
             $("#d-day").html(result);
         });
     </script>
+    <script>
+      function copyToClipboard(elementId) {
+        const text = document.getElementById(elementId).innerText;
+        navigator.clipboard.writeText(text).then(function() {
+          alert("복사되었습니다: " + text);
+        }, function(err) {
+          alert("복사 실패: " + err);
+        });
+      }
+    </script>
 </head>
 <body class="text-center">
 <div class="top-div">
     <header class="inner cover cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <h1 class="wow fadeIn cover-heading" style="text-align: right; margin-top: 0.5em; margin-right: 0.5em; font-size: 2rem;">
             <span style="letter-spacing : -0.13em; margin-right: 0.1em">⎽⎽</span><br/>
-            10 <br/>
-            月 <br/>
-            19 <br/>
-            日 <br/>
+            <span style="color: #FFB6C1;">
+                10 <br/>
+                월 <br/>
+                19 <br/>
+                일 <br/>
+            </span>
             <span style="letter-spacing : -0.13em; margin-right: 0.1em;">⎺⎺</span>
         </h1>
     </header>
@@ -208,13 +220,13 @@
                         <span class="section4-sec2">엄한솔</span>
                     </div>
                     <div class="col">
-                        <button onclick="document.location.href='tel:010-5518-5773'" class="section4-sec3">
+                        <button onclick="document.location.href='tel:010-7371-7821'" class="section4-sec3">
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-telephone-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z"/>
                             </svg>
                         </button>
                         &nbsp&nbsp&nbsp
-                        <button onclick="document.location.href='sms:010-5518-5773'" class="section4-sec3">
+                        <button onclick="document.location.href='sms:010-7371-7821'" class="section4-sec3">
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-chat-dots-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                             </svg>
@@ -229,13 +241,13 @@
                         <span class="section4-sec2">이혜원</span>
                     </div>
                     <div class="col">
-                        <button onclick="document.location.href='tel:010-7187-0721'" class="section4-sec3-g">
+                        <button onclick="document.location.href='tel:010-5800-2161'" class="section4-sec3-g">
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-telephone-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z"/>
                             </svg>
                         </button>
                         &nbsp&nbsp&nbsp
-                        <button onclick="document.location.href='sms:010-7187-0721'" class="section4-sec3-g">
+                        <button onclick="document.location.href='sms:010-5800-2161'" class="section4-sec3-g">
                             <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-chat-dots-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M16 8c0 3.866-3.582 7-8 7a9.06 9.06 0 0 1-2.347-.306c-.584.296-1.925.864-4.181 1.234-.2.032-.352-.176-.273-.362.354-.836.674-1.95.77-2.966C.744 11.37 0 9.76 0 8c0-3.866 3.582-7 8-7s8 3.134 8 7zM5 8a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                             </svg>
@@ -290,7 +302,8 @@
                             </button>
                         </div>
                         <div class="modal-body section7-modal section7-modal-content">
-                            신랑 혼주 : 신한 110-114-815335 고복순
+                            신랑 혼주 : 신한 <span id="groom-account">110-418-610840</span> 김옥경
+                            <button class="btn btn-sm btn-outline-secondary ml-2" onclick="copyToClipboard('groom-account')">복사</button>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
@@ -313,7 +326,8 @@
                             </button>
                         </div>
                         <div class="modal-body section7-modal section7-modal-content">
-                            신부 혼주 : 농협 352-1178-4416-13 한정연
+                            신부 혼주 : 농협 <span id="bride-account">352-1178-4416-13</span> 한정연
+                            <button class="btn btn-sm btn-outline-secondary ml-2" onclick="copyToClipboard('bride-account')">복사</button>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
@@ -327,7 +341,7 @@
         <div class="wow fadeInUp section5 inner cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
             <br/>
             <p class="section5-title section5-main">Date</p>
-            <p class="section5-title section5-sub" style="margin-top: 0;">11월 28일 · 토요일 · 오전 11:00</p>
+            <p class="section5-title section5-sub" style="margin-top: 0;">10월 19일 · 일요일 · 오전 11:00</p>
             <table class="wow fadeInUp section5-title section5-table">
                 <tr>
                     <td class="sun">S</td>
@@ -339,48 +353,49 @@
                     <td>S</td>
                 </tr>
                 <tr>
-                    <td class="sun">1</td>
+                    <td class="sun">28</td>
+                    <td>29</td>
+                    <td>30</td>
+                    <td>1</td>
                     <td>2</td>
                     <td>3</td>
                     <td>4</td>
-                    <td>5</td>
+                </tr>
+                <tr>
+                    <td class="sun">5</td>
                     <td>6</td>
                     <td>7</td>
-                </tr>
-                <tr>
-                    <td class="sun">8</td>
+                    <td>8</td>
                     <td>9</td>
                     <td>10</td>
-                    <td>11</td>
-                    <td>12</td>
-                    <td>13</td>
-                    <td>14</td>
+                    <td>1</td>
                 </tr>
                 <tr>
-                    <td class="sun">15</td>
+                    <td class="sun">12</td>
+                    <td>13</td>
+                    <td>14</td>
+                    <td>15</td>
                     <td>16</td>
                     <td>17</td>
                     <td>18</td>
-                    <td>19</td>
-                    <td>20</td>
-                    <td>21</td>
                 </tr>
                 <tr>
-                    <td class="sun">22</td>
+                    <td class="sun check">19</td>
+                    <td>20</td>
+                    <td>21</td>
+                    <td>22</td>
                     <td>23</td>
                     <td>24</td>
                     <td>25</td>
-                    <td>26</td>
-                    <td>27</td>
-                    <td class="check">28</td>
                 </tr>
                 <tr>
                     <td class="sun">29</td>
+                    <td>26</td>
+                    <td>27</td>
+                    <td>28</td>
+                    <td>29</td>
                     <td>30</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>31</td>
                     <td></td>
                 </tr>
             </table>
@@ -391,9 +406,9 @@
             <br/><br/>
             <p class="wow fadeInUp section6-title section6-main">Location</p>
             <div class="wow fadeInUp  section6-title">
-                <p class="section6-location-main" style="margin-bottom: 0;">더채플앳웨스트 7층 단독홀</p>
+                <p class="section6-location-main" style="margin-bottom: 0;">그랑프리빌딩 12층 빌라드마리</p>
                 <p class="section6-location-sub" style="text-align: center;">
-                    서울특별시 강서구 양천로 476
+                    인천시 부평구 경원대로 1404 (부평동 185-30)
                 </p>
             </div>
             <br/>
