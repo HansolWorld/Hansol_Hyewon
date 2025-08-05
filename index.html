@@ -32,6 +32,21 @@
                 font-size: 3.5rem;
             }
         }
+
+        .carousel-inner {
+          width: 100%;
+          aspect-ratio: 2 / 3; /* 2:3 frame */
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+          background-color: #fff;
+        }
+
+        .carousel-item img {
+          max-height: 100%;
+          max-width: 100%;
+          object-fit: contain;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet">
