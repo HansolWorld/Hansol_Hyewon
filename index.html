@@ -18,8 +18,25 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
+        .message {
+            color: black;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            text-align: left;
+        }
+
+        .message .meta {
+            font-size: 0.9em;
+            color: gray;
+            margin-top: 5px;
+        }
+
         .bd-placeholder-img {
             font-size: 1.125rem;
+            
             text-anchor: middle;
             -webkit-user-select: none;
             -moz-user-select: none;
@@ -432,7 +449,7 @@
                 <div id="map" class="wow fadeInUp" style="width:100%; height:350px;"></div>
 
                 <!-- ✅ 네이버 지도 JS SDK 불러오기 -->
-                <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=2tbv5lf304"></script>
+                <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId="></script>
 
                 <script>
                     // ✅ 지도 중심 좌표
@@ -517,6 +534,33 @@
             </div>
             <br/><br/>
             <br/><br/>
+
+            <hr />
+            <h3 id="message-title" style="color: black; display: none;">🎉 축하 메시지</h3>
+            <div id="messages"></div>
+
+            <div class="container mt-5">
+            <h5 style="color: black;">💌 축하 메시지 남기기</h5>
+
+            <!-- 메시지 텍스트 영역 -->
+            <textarea id="message" placeholder="축하 메시지를 입력해주세요" class="form-control mb-2" rows="4"></textarea>
+
+            <!-- 이름 + 전화번호를 가로 반반으로 나누기 -->
+            <div class="form-row mb-2">
+            <div class="col">
+                <input type="text" id="name" placeholder="이름" class="form-control">
+            </div>
+            <div class="col">
+                <input type="text" id="phone_suffix" placeholder="전화번호 뒷자리 (예: 1234)" class="form-control">
+            </div>
+            </div>
+
+            <!-- 버튼 -->
+            <button onclick="submitMessage()" class="btn btn-primary">메시지 등록</button>
+            </div>
+
+            <br/><br/>
+            <br/><br/>
         </div>
         <footer class="pt-5 text-muted text-center text-small section8">
             <p class="mb-1">© 2025-10-19 Hansol, Heywon</p>
@@ -528,5 +572,73 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script>
+    const supabaseClient = supabase.createClient(
+      'https://qjhcrlmiknbvogfohqeh.supabase.co',
+      ''
+    );
+
+    async function submitMessage() {
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone_suffix').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if (!name || !phone || !message) {
+        alert("모든 항목을 입력해주세요.");
+        return;
+      }
+
+      const { error } = await supabaseClient.from('messages').insert([
+        { name, phone_suffix: phone, message }
+      ]);
+
+      if (error) {
+        alert("등록 실패: " + error.message);
+      } else {
+        alert("🎉 메시지가 등록되었습니다!");
+        document.getElementById('name').value = "";
+        document.getElementById('phone_suffix').value = "";
+        document.getElementById('message').value = "";
+        loadMessages(); // 새로고침 없이 메시지 다시 불러오기
+      }
+    }
+
+    async function loadMessages() {
+    const { data, error } = await supabaseClient
+        .from('messages')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+    const container = document.getElementById('messages');
+    const title = document.getElementById('message-title');
+    container.innerHTML = '';
+
+    if (error) {
+        container.innerHTML = `<p style="color:red;">불러오기 실패: ${error.message}</p>`;
+        title.style.display = 'none';
+        return;
+    }
+
+    if (data.length === 0) {
+        title.style.display = 'none'; // 메시지가 없으면 제목 숨김
+        return;
+    }
+
+    title.style.display = 'block'; // 메시지가 있으면 제목 보이기
+
+    data.forEach(msg => {
+        container.innerHTML += `
+        <div class="message">
+            <div>${msg.message}</div>
+            <div class="meta">- ${msg.name} (${msg.phone_suffix}) · ${new Date(msg.created_at).toLocaleString()}</div>
+        </div>
+        `;
+    });
+    }
+
+    loadMessages(); // 페이지 로딩 시 실행
+</script>
+
 </body>
 </html>
