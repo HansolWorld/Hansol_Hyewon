@@ -37,7 +37,6 @@ jobs:
           echo "  supabaseApi: '${{ secrets.SUPABASEAPI }}'," >> apikey.js
           echo "  supabaseUrl: '${{ secrets.SUPABASEURL }}'" >> apikey.js
           echo "};" >> apikey.js
-          echo "export default config;" >> apikey.js
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
