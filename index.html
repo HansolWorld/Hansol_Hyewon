@@ -131,39 +131,31 @@
     </header>
     <main role="main" class="inner">
       <div class="wow fadeInUp">
-        <p class="top-title">엄한솔 · 이혜원</p>
-        <p class="top-title-sub">일요일 오전 11시</p>
-        <p class="top-title-sub">빌라드마리 웨딩홀</p>
-        <br /><br /><br />
-        <hr class="cover-container" />
         <br />
+        <br />
+        <p class="top-title">엄한솔 <span style="color: #FFB6C1;">♥</span> 이혜원</p>
+        <p class="top-title-sub">10월 19일 (일) 오전 11시</p>
+        <p class="top-title-sub">빌라드마리 웨딩홀</p>
+        <br />
+        <hr class="cover-container" />
       </div>
       <div class="wow fadeInUp">
         <p class="section1-title section1-main">
-          예쁜 예감이 들었다 <br />
-          우리는 언제나 손을 잡고 있게 될 것이다.
-          <br /><br />
-          - 이이체, 연인 -
-        </p>
-        <br />
-      </div>
-      <div class="wow fadeInUp">
-        <p class="section1-title section1-sub">
           사랑으로 물들어가는 계절,<br />
           연인에서 부부라는 이름으로<br />
-          평생을 함께 하고자 합니다.<br />
-          귀한 걸음 하시어<br />
+          함께 평생을 걸어가고자 합니다.<br />
+          귀한 걸음 하시어,<br />
           두 사람의 언약을 지켜봐 주시면<br />
-          더 없는 기쁨으로 간직하겠습니다.
+          더없는 기쁨으로 간직하겠습니다.
         </p>
         <br />
       </div>
       <div class="wow fadeInUp">
         <div class="section1-title section1-sub2">
-          김옥경<span class="small">의&nbsp아들&nbsp&nbsp</span>엄한솔<br />
-          이강덕 · 조선희<span class="small">의&nbsp&nbsp&nbsp딸&nbsp&nbsp&nbsp</span>이혜원
+          <strong>김옥경</strong><span class="small" style="opacity: 0.8;">의&nbsp아들&nbsp&nbsp</span><strong>엄한솔</strong><br />
+          <strong>이강덕</strong> · <strong>조선희</strong><span class="small" style="opacity: 0.8;">의&nbsp&nbsp&nbsp딸&nbsp&nbsp&nbsp</span><strong>이혜원</strong>
         </div>
-        <br /><br /><br /><br />
+        <br />
       </div>
       <hr class="cover-container" />
       <br />
@@ -464,8 +456,12 @@
         <br />
         <div id="map" class="wow fadeInUp" style="width:100%;height:350px;"></div>
         <!-- ✅ 지도 표시 영역 -->
-        <div id="map" class="wow fadeInUp" style="width:100%; height:350px;"></div>
-
+        <div style="display: flex; justify-content: center; gap: 10px; margin-top: 1em;">
+          <a class="btn btn-outline-success btn-sm" href="https://map.naver.com/v5/search/빌라드마리/place/1154601785" target="_blank">네이버 지도</a>
+          <a class="btn btn-outline-warning btn-sm" href="https://map.kakao.com/link/to/빌라드마리,37.490967,126.7249587" target="_blank">카카오내비</a>
+          <a class="btn btn-outline-primary btn-sm" href="https://apis.openapi.sk.com/tmap/app/routes?appKey=발급받은AppKey&name=빌라드마리&lon=126.7249587&lat=37.490967" target="_blank">티맵</a>
+        </div>
+        
         <!-- ✅ 네이버 지도 JS SDK 불러오기 -->
         <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=2tbv5lf304"></script>
         <script>
@@ -658,7 +654,7 @@
         container.innerHTML += `
         <div class="message">
             <div>${msg.message}</div>
-            <div class="meta">- ${msg.name} (${msg.phone_suffix}) · ${new Date(msg.created_at).toLocaleString()}</div>
+            <div class="meta">- ${msg.name} (${msg.phone_suffix}) · ${new Date(msg.created_at).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, '')}</div>
         </div>
         `;
       });
