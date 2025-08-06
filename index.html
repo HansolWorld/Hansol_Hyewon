@@ -63,6 +63,16 @@
       background-color: transparent;
     }
 
+    .message-carousel-inner {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      /* justify-content: center; */
+      overflow: hidden;
+      background-color: transparent;
+    }
+
     .carousel-item img {
       max-height: 100%;
       max-width: 100%;
@@ -152,8 +162,10 @@
       </div>
       <div class="wow fadeInUp">
         <div class="section1-title section1-sub2">
-          <strong>김옥경</strong><span class="small" style="opacity: 0.8;">의&nbsp아들&nbsp&nbsp</span><strong>엄한솔</strong><br />
-          <strong>이강덕</strong> · <strong>조선희</strong><span class="small" style="opacity: 0.8;">의&nbsp&nbsp&nbsp딸&nbsp&nbsp&nbsp</span><strong>이혜원</strong>
+          <strong>김옥경</strong><span class="small"
+            style="opacity: 0.8;">의&nbsp아들&nbsp&nbsp</span><strong>엄한솔</strong><br />
+          <strong>이강덕</strong> · <strong>조선희</strong><span class="small"
+            style="opacity: 0.8;">의&nbsp&nbsp&nbsp딸&nbsp&nbsp&nbsp</span><strong>이혜원</strong>
         </div>
         <br />
       </div>
@@ -457,11 +469,15 @@
         <div id="map" class="wow fadeInUp" style="width:100%;height:350px;"></div>
         <!-- ✅ 지도 표시 영역 -->
         <div style="display: flex; justify-content: center; gap: 10px; margin-top: 1em;">
-          <a class="btn btn-outline-success btn-sm" href="https://map.naver.com/v5/search/빌라드마리/place/1154601785" target="_blank">네이버 지도</a>
-          <a class="btn btn-outline-warning btn-sm" href="https://map.kakao.com/link/to/빌라드마리,37.490967,126.7249587" target="_blank">카카오내비</a>
-          <a class="btn btn-outline-primary btn-sm" href="https://apis.openapi.sk.com/tmap/app/routes?appKey=발급받은AppKey&name=빌라드마리&lon=126.7249587&lat=37.490967" target="_blank">티맵</a>
+          <a class="btn btn-outline-success btn-sm" href="https://map.naver.com/v5/search/빌라드마리/place/1154601785"
+            target="_blank">네이버 지도</a>
+          <a class="btn btn-outline-warning btn-sm" href="https://map.kakao.com/link/to/빌라드마리,37.490967,126.7249587"
+            target="_blank">카카오내비</a>
+          <a class="btn btn-outline-primary btn-sm"
+            href="https://apis.openapi.sk.com/tmap/app/routes?appKey=발급받은AppKey&name=빌라드마리&lon=126.7249587&lat=37.490967"
+            target="_blank">티맵</a>
         </div>
-        
+
         <!-- ✅ 네이버 지도 JS SDK 불러오기 -->
         <script type="text/javascript" src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=2tbv5lf304"></script>
         <script>
@@ -553,8 +569,66 @@
         <br /><br />
 
         <hr />
-        <h3 id="message-title" style="color: black; display: none;">🎉 축하 메시지</h3>
-        <div id="messages"></div>
+        <h3 id="message-title" class="wow fadeInUp section3-title section3-main" style="display: none;">🎉 축하 Messages</h3>
+        <div class="w-100 mt-5 px-3 py-4 mb-5" style="background-color: #f9f9f9; border-radius: 12px;">
+          <div id="messageCarousel" class="carousel slide w-100" data-ride="carousel">
+            <div class="message-carousel-inner w-100" id="message-carousel-inner" style="gap: 10px;"></div>
+            <a class="carousel-control-prev" href="#messageCarousel" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#messageCarousel" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+        <script>
+          function renderMessages(messages) {
+            const container = document.getElementById('message-carousel-inner');
+            container.innerHTML = '';
+            messages.forEach((msg, index) => {
+              const item = document.createElement('div');
+              item.className = 'carousel-item' + (index === 0 ? ' active' : '');
+              // Move metadata to the bottom of the card, with name left and date right
+              item.innerHTML = `
+                <div class="w-100 px-2">
+                  <div class="card w-100 shadow-sm border-0" style="min-height: 220px; border-radius: 12px; background-color: #ffffff;">
+                    <div class="card-body d-flex flex-column justify-content-between text-center px-3 py-4" style="min-height: 180px;">
+                      <p class="card-text mb-3" style="font-size: 1rem; color: #333; white-space: pre-wrap;">${msg.message}</p>
+                      <div class="mt-auto text-secondary small text-start">
+                        <hr style="margin: 1rem 0 0.5rem 0; opacity: 0.2;" />
+                        <div class="d-flex justify-content-between" style="font-size: 0.85rem;">
+                          <span>- ${msg.name} (${msg.phone_suffix})</span>
+                          <span>${new Date(msg.created_at).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, '')}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              `;
+              container.appendChild(item);
+            });
+          }
+
+          async function loadMessages() {
+            const { data, error } = await supabaseClient
+              .from('messages')
+              .select('*')
+              .order('created_at', { ascending: false });
+
+            const title = document.getElementById('message-title');
+            if (error || !data || data.length === 0) {
+              title.style.display = 'none';
+              return;
+            }
+
+            title.style.display = 'block';
+            renderMessages(data);
+          }
+
+          loadMessages();
+        </script>
 
         <div class="container mt-5">
           <h5 style="color: black;">💌 축하 메시지 남기기</h5>
@@ -627,40 +701,7 @@
       }
     }
 
-    async function loadMessages() {
-      const { data, error } = await supabaseClient
-        .from('messages')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-      const container = document.getElementById('messages');
-      const title = document.getElementById('message-title');
-      container.innerHTML = '';
-
-      if (error) {
-        container.innerHTML = `<p style="color:red;">불러오기 실패: ${error.message}</p>`;
-        title.style.display = 'none';
-        return;
-      }
-
-      if (data.length === 0) {
-        title.style.display = 'none'; // 메시지가 없으면 제목 숨김
-        return;
-      }
-
-      title.style.display = 'block'; // 메시지가 있으면 제목 보이기
-
-      data.forEach(msg => {
-        container.innerHTML += `
-        <div class="message">
-            <div>${msg.message}</div>
-            <div class="meta">- ${msg.name} (${msg.phone_suffix}) · ${new Date(msg.created_at).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, '')}</div>
-        </div>
-        `;
-      });
-    }
-
-    loadMessages(); // 페이지 로딩 시 실행
+    loadMessages(); // 메시지 로딩
   </script>
 
 </body>
