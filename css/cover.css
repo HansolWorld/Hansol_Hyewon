@@ -36,6 +36,7 @@ a:hover {
   border: .05rem solid #fff;
 }
 
+
 /* .top-title {
   margin-top: 1em;
   margin-bottom: 1em;
@@ -253,7 +254,7 @@ header {
 }
 
 .section3 {
-  background-color: #f9f9f9;
+  background-color: #feefef;
 }
 
 .section3-title {
@@ -315,7 +316,7 @@ header {
 }
 
 .section5 {
-  background-color: #f9f9f9;
+  background-color: #feefef;
 }
 
 .section5-title {
@@ -354,8 +355,8 @@ header {
 }
 
 .section5-table tr .check{
-  color: white;
-  background-color: chocolate;
+  color: red;
+  background-color: #feefef;
   border-radius: 50px;
 }
 
@@ -462,7 +463,7 @@ header {
 }
 
 .section8 {
-  background-color: #f9f9f9;
+  background-color: #feefef;
 }
 
 /*
