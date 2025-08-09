@@ -53,14 +53,21 @@
       }
     }
 
-    .carousel-inner {
+    /* Gallery 전용 캐러셀 높이 제어 */
+    .section3-image .carousel-inner {
       width: 100%;
-      aspect-ratio: 2 / 3;
-      /* 2:3 frame */
+      aspect-ratio: 2 / 3; /* 2:3 portrait frame */
       display: flex;
       align-items: center;
       overflow: hidden;
       background-color: transparent;
+      max-height: 70vh; /* 너무 길어지는 것 방지 */
+    }
+
+    /* Message 캐러셀은 높이 자동 */
+    #messageCarousel .carousel-inner {
+      aspect-ratio: auto;
+      height: auto;
     }
 
     .message-carousel-inner {
@@ -629,10 +636,10 @@
         <div id="message-section">
           <p class="wow fadeInUp section6-title section6-main">Message</p>
 
-          <div class="card mt-4 w-100" style="max-width: 720px; margin: 0 auto; padding: 1rem;">
+          <div class="card mt-4 w-100" style="max-width: 720px; margin: 0 auto; padding: 1rem; background-color: #feefef;">
             <!-- <div class="w-100 mt-5 px-3 py-4 mb-5" style="background-color: #feefef; border-radius: 12px;"> -->
             <div id="messageCarousel" class="carousel slide w-100" data-ride="carousel">
-              <div class="message-carousel-inner w-100" id="message-carousel-inner" style="gap: 10px;"></div>
+              <div class="carousel-inner message-carousel-inner w-100" id="message-carousel-inner" style="gap: 10px;"></div>
               <a class="carousel-control-prev" href="#messageCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -648,28 +655,52 @@
           function renderMessages(messages) {
             const container = document.getElementById('message-carousel-inner');
             container.innerHTML = '';
-            messages.forEach((msg, index) => {
+
+            for (let i = 0; i < messages.length; i += 2) {
               const item = document.createElement('div');
-              item.className = 'carousel-item' + (index === 0 ? ' active' : '');
-              // Move metadata to the bottom of the card, with name left and date right
-              item.innerHTML = `
-                <div class="w-100 px-2">
-                  <div class="card w-100 shadow-sm border-0" style="min-height: 220px; border-radius: 12px; background-color: #ffffff;">
-                    <div class="card-body d-flex flex-column justify-content-between text-center px-3 py-4" style="min-height: 180px;">
-                      <p class="card-text mb-3" style="font-size: 1rem; color: #333; white-space: pre-wrap;">${msg.message}</p>
-                      <div class="mt-auto text-secondary small text-start">
-                        <hr style="margin: 1rem 0 0.5rem 0; opacity: 0.2;" />
-                        <div class="d-flex justify-content-between" style="font-size: 0.85rem;">
-                          <span>- ${msg.name} (${msg.phone_suffix})</span>
-                          <span>${new Date(msg.created_at).toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\./g, '.').replace(/\s/g, '')}</span>
+              item.className = 'carousel-item' + (i === 0 ? ' active' : '');
+
+              // 한 슬라이드에 카드 2개 (좌/우)
+              const row = document.createElement('div');
+              row.className = 'w-100 d-flex';
+              row.style.gap = '10px';
+
+              for (let k = 0; k < 2; k++) {
+                const msg = messages[i + k];
+                const col = document.createElement('div');
+                col.style.flex = '1';
+
+                if (!msg) {
+                  // 메시지가 홀수 개일 때 오른쪽 칸은 빈 칸 유지
+                  col.innerHTML = '';
+                } else {
+                  const dateStr = new Date(msg.created_at)
+                    .toLocaleDateString('ko-KR', { year: 'numeric', month: '2-digit', day: '2-digit' })
+                    .replace(/\./g, '.').replace(/\s/g, '');
+
+                  col.innerHTML = `
+                    <div class="w-100">
+                      <div class="card w-100 shadow-sm border-0" style="min-height: 220px; border-radius: 12px; background-color: #ffffff;">
+                        <div class="card-body d-flex flex-column justify-content-between text-center px-3 py-4" style="min-height: 180px;">
+                          <p class="card-text mb-3" style="font-size: 1rem; color: #333; white-space: pre-wrap;">${msg.message}</p>
+                          <div class="mt-auto text-secondary small text-start">
+                            <hr style="margin: 1rem 0 0.5rem 0; opacity: 0.2;" />
+                            <div class="d-flex justify-content-between" style="font-size: 0.85rem;">
+                              <span>- ${msg.name} (${msg.phone_suffix})</span>
+                              <span>${dateStr}</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-              `;
+                    </div>`;
+                }
+
+                row.appendChild(col);
+              }
+
+              item.appendChild(row);
               container.appendChild(item);
-            });
+            }
           }
 
           async function loadMessages() {
