@@ -715,7 +715,17 @@ var marker = new naver.maps.Marker({
 });
 
 var infoWindow = new naver.maps.InfoWindow({
-    content: '<div style="padding:10px;font-size:14px; color: black;">🏛 빌라드마리 웨딩홀</div>'
+    content: '<div style="padding:10px;font-size:14px; color: black;">🏛 빌라드마리 웨딩홀</div>',
+            maxWidth: 200,
+            height: 50,
+            backgroundColor: "white",
+            borderColor: "black",
+            borderWidth: 2,
+            disableAnchor: true,
+            textAlign: "center",
+            margin: "auto",
+
+            pixelOffset: new naver.maps.Point(0, -5)
 });
 
 infoWindow.open(map, marker);
