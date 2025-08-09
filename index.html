@@ -90,6 +90,15 @@
     .transport .t-sub {margin: 4px 0 10px 0; padding:0; list-style:none;}
     .transport .t-sub li {padding-left: 18px; position:relative; color:#666;}
     .transport .t-sub li:before {content:'-'; position:absolute; left:0;}
+
+    /* Transport 섹션 정렬 조정: 섹션은 가운데, 항목은 왼쪽 정렬 */
+    .transport { max-width: 720px; margin-left: auto; margin-right: auto; }
+    .transport .t-section, 
+    .transport .t-title,
+    .transport .t-list, 
+    .transport .t-list > li,
+    .transport .t-sub,
+    .transport .t-sub li { text-align: left; }
   </style>
   <!-- Custom styles for this template -->
   <link href="css/cover.css" rel="stylesheet">
@@ -146,23 +155,22 @@
 <body class="text-center">
   <div class="top-div">
     <header class="inner cover cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <h1 class="wow fadeIn cover-heading"
-        style="text-align: right; margin-top: 0.5em; margin-right: 0.5em; font-size: 2rem;">
-        <span style="letter-spacing : -0.13em; margin-right: 0.1em">⎽⎽</span><br />
-        <span style="color: #FFB6C1;">
+      <h1 class="wow fadeIn cover-heading" style="text-align: right; margin-top: 0.5em; margin-right: 0.5em; font-size: 2rem;">
+        <span style="letter-spacing : -0.13em; margin-right: 0.1em; color: #feefef;">⎽⎽</span><br />
+        <span style="color: #feefef;">
           10 <br />
           월 <br />
           19 <br />
           일 <br />
         </span>
-        <span style="letter-spacing : -0.13em; margin-right: 0.1em;">⎺⎺</span>
+        <span style="letter-spacing : -0.13em; margin-right: 0.1em; color: #feefef;">⎺⎺</span>
       </h1>
     </header>
     <main role="main" class="inner">
       <div class="wow fadeInUp">
         <br />
         <br />
-        <p class="top-title">엄한솔 <span style="color: #FFB6C1;">♥</span> 이혜원</p>
+        <p class="top-title">엄한솔 <span style="color: #feefef;">♥</span> 이혜원</p>
         <p class="top-title-sub">10월 19일 (일) 오전 11시</p>
         <p class="top-title-sub">빌라드마리 웨딩홀</p>
         <br />
@@ -510,13 +518,21 @@
         </div>
 
         <br />
-        <div class="transport">
+        <div class="transport" style="width: 100%;">
           <!-- 지하철 -->
           <div class="t-section">
             <div class="t-title">지하철</div>
             <ul class="t-list">
-              <li>1호선: 부평역 하차후 북광장 출구로 나와 좌측 10m 건물 12층</li>
-              <li>인천1호선: 부평역 하차후 11번 출구로 나와 좌측 건물 12층</li>
+              <li>1호선: 부평역 하차 (부평역에서 도보 2분 거리)
+                <ul class="t-sub">
+                  <li>북부광장 출구 도보 2분거리 (택시정류장에서 우측방향 12층 건물)</li>
+                </ul>
+              </li>
+              <li>인천지하철: 부평역 하차
+                <ul class="t-sub">
+                  <li>지하상가 11번 출구로 나오시면 오른편으로 보임 (노벨약국, 청아보석 방향)</li>
+                </ul>
+              </li>
             </ul>
           </div>
 
@@ -524,9 +540,10 @@
           <div class="t-section">
             <div class="t-title">버스</div>
             <ul class="t-list">
-              <li>간선: 652, 672</li>
-              <li>지선: 6632</li>
-              <li>광역: 770</li>
+              <li>지선버스: 551, 558, 561, 574,585</li>
+              <li>간선버스: 1, 11, 12, 43, 45, 47</li>
+              <li>좌석버스: 302, 302B</li>
+              <li>시외버스: 88(부천), 737(수원/안산), 8414(안산), 9500(양재역)</li>
             </ul>
           </div>
 
@@ -534,15 +551,11 @@
           <div class="t-section">
             <div class="t-title">자가용</div>
             <ul class="t-list">
-              <li>올림픽 대로 방면
+              <li>서울외곽순환도로 송내IC(부평)-> 직진(부평역 방향)
                 <ul class="t-sub">
-                  <li>올림픽 대로 > 강서구청 방면 진입 > 가양사거리 우회전 후 150m 전방 위치</li>
-                  <li>(건너편 위치 : 150m앞 유턴 후 주차장 진입)</li>
-                </ul>
-              </li>
-              <li>강변북로 방면
-                <ul class="t-sub">
-                  <li>강변북로 > 가양대로 진입 > 가양역사거리 50m 앞 가양역 8번출구 앞에서 우회전 > 화곡로 69길 500m 사거리 우회전 > 50m앞 가양 3,5단지 사거리 우회전 > 150m 앞 주차장 진입</li>
+                  <li>동소정사거리에서 우회전 굴다리 오거리에서 좌회전</li>
+                  <li>부평역 북부광장 진입 경인고속도로 부평IC 좌회전</li>
+                  <li>부평역 방향으로 직진 → 부평역 북부광장 진입</li>
                 </ul>
               </li>
             </ul>
