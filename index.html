@@ -56,12 +56,14 @@
     /* Gallery 전용 캐러셀 높이 제어 */
     .section3-image .carousel-inner {
       width: 100%;
-      aspect-ratio: 2 / 3; /* 2:3 portrait frame */
+      aspect-ratio: 2 / 3;
+      /* 2:3 portrait frame */
       display: flex;
       align-items: center;
       overflow: hidden;
       background-color: transparent;
-      max-height: 70vh; /* 너무 길어지는 것 방지 */
+      max-height: 70vh;
+      /* 너무 길어지는 것 방지 */
     }
 
     /* Message 캐러셀은 높이 자동 */
@@ -551,96 +553,17 @@
 
       <br /><br />
       <br /><br />
-
       <div class="wow fadeInUp inner cover-container d-flex w-100 h-100 mx-auto flex-column">
-        <p class="wow fadeInUp section6-title section6-main">Location</p>
-        <div class="wow fadeInUp  section6-title">
-          <p class="section6-location-main" style="margin-bottom: 0;">그랑프리빌딩 12층 빌라드마리</p>
-          <p class="section6-location-sub" style="text-align: center;">
-            인천시 부평구 경원대로 1404 (부평동 185-30)
-          </p>
-        </div>
-        <br />
-
-        <div class="card mt-4 w-100"
-          style="max-width: 720px; margin: 0 auto; padding: 1rem; background-color: #feefef;">
-          <!-- 지도 -->
-          <div id="map" style="width: 100%; height: 400px; border-radius: 8px;"></div>
-
-          <!-- 경로 버튼 -->
-          <div style="display: flex; justify-content: center; width: 100%; margin-top: 0.5rem;">
-            <a href="nmap://search?query=빌라드마리&appname=com.example.myapp" target="_blank"
-              style="flex: 1; text-align: center; color: #28a745; background-color: #fff; border: 1px solid #28a745; padding: 0.375rem 0.75rem; font-size: 0.875rem; display: inline-block; line-height: 1.5; border-radius: 0.2rem; margin-right: 4px;">
-              네이버 지도
-            </a>
-            <a href="kakaomap://search?q=빌라드마리" target="_blank"
-              style="flex: 1; text-align: center; color: #ffc107; background-color: #fff; border: 1px solid #ffc107; padding: 0.375rem 0.75rem; font-size: 0.875rem; display: inline-block; line-height: 1.5; border-radius: 0.2rem; margin-right: 4px;">
-              카카오내비
-            </a>
-            <a href="https://tmap.life/6954e19a" target="_blank"
-              style="flex: 1; text-align: center; color: #007bff; background-color: #fff; border: 1px solid #007bff; padding: 0.375rem 0.75rem; font-size: 0.875rem; display: inline-block; line-height: 1.5; border-radius: 0.2rem;">
-              티맵
-            </a>
-          </div>
-
-          <br />
-          <div class="transport" style="width: 100%;">
-            <!-- 지하철 -->
-            <div class="t-section">
-              <div class="t-title">지하철</div>
-              <ul class="t-list">
-                <li>1호선: 부평역 하차 (부평역에서 도보 2분 거리)
-                  <ul class="t-sub">
-                    <li>북부광장 출구 도보 2분거리 (택시정류장에서 우측방향 12층 건물)</li>
-                  </ul>
-                </li>
-                <li>인천지하철: 부평역 하차
-                  <ul class="t-sub">
-                    <li>지하상가 11번 출구로 나오시면 오른편으로 보임 (노벨약국, 청아보석 방향)</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
-            <!-- 버스 -->
-            <div class="t-section">
-              <div class="t-title">버스</div>
-              <ul class="t-list">
-                <li>지선버스: 551, 558, 561, 574,585</li>
-                <li>간선버스: 1, 11, 12, 43, 45, 47</li>
-                <li>좌석버스: 302, 302B</li>
-                <li>시외버스: 88(부천), 737(수원/안산), 8414(안산), 9500(양재역)</li>
-              </ul>
-            </div>
-
-            <!-- 자가용 -->
-            <div class="t-section">
-              <div class="t-title">자가용</div>
-              <ul class="t-list">
-                <li>서울외곽순환도로 송내IC(부평)-> 직진(부평역 방향)
-                  <ul class="t-sub">
-                    <li>동소정사거리에서 우회전 굴다리 오거리에서 좌회전</li>
-                    <li>부평역 북부광장 진입 경인고속도로 부평IC 좌회전</li>
-                    <li>부평역 방향으로 직진 → 부평역 북부광장 진입</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <br /><br />
-        <br /><br />
-        </div>
-        <div class="wow fadeInUp inner cover-container d-flex w-100 h-100 mx-auto flex-column">
         <!-- ✅ 메시지 섹션 전체를 감쌈 -->
         <div id="message-section">
           <p class="wow fadeInUp section6-title section6-main">Message</p>
 
-          <div class="card mt-4 w-100" style="max-width: 720px; margin: 0 auto; padding: 1rem; background-color: #feefef;">
+          <div class="card mt-4 w-100"
+            style="max-width: 720px; margin: 0 auto; padding: 1rem; background-color: #feefef;">
             <!-- <div class="w-100 mt-5 px-3 py-4 mb-5" style="background-color: #feefef; border-radius: 12px;"> -->
             <div id="messageCarousel" class="carousel slide w-100" data-ride="carousel">
-              <div class="carousel-inner message-carousel-inner w-100" id="message-carousel-inner" style="gap: 10px;"></div>
+              <div class="carousel-inner message-carousel-inner w-100" id="message-carousel-inner" style="gap: 10px;">
+              </div>
               <a class="carousel-control-prev" href="#messageCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
@@ -742,6 +665,87 @@
 
           <!-- 버튼 -->
           <button onclick="submitMessage()" class="btn btn-primary">메시지 등록</button>
+        </div>
+
+        <br /><br />
+        <br /><br />
+      </div>
+
+      <div class="wow fadeInUp inner cover-container d-flex w-100 h-100 mx-auto flex-column">
+        <p class="wow fadeInUp section6-title section6-main">Location</p>
+        <div class="wow fadeInUp  section6-title">
+          <p class="section6-location-main" style="margin-bottom: 0;">그랑프리빌딩 12층 빌라드마리</p>
+          <p class="section6-location-sub" style="text-align: center;">
+            인천시 부평구 경원대로 1404 (부평동 185-30)
+          </p>
+        </div>
+        <br />
+
+        <div class="card mt-4 w-100"
+          style="max-width: 720px; margin: 0 auto; padding: 1rem; background-color: #feefef;">
+          <!-- 지도 -->
+          <div id="map" style="width: 100%; height: 400px; border-radius: 8px;"></div>
+
+          <!-- 경로 버튼 -->
+          <div style="display: flex; justify-content: center; width: 100%; margin-top: 0.5rem;">
+            <a href="nmap://search?query=빌라드마리&appname=com.example.myapp" target="_blank"
+              style="flex: 1; text-align: center; color: #28a745; background-color: #fff; border: 1px solid #28a745; padding: 0.375rem 0.75rem; font-size: 0.875rem; display: inline-block; line-height: 1.5; border-radius: 0.2rem; margin-right: 4px;">
+              네이버 지도
+            </a>
+            <a href="kakaomap://search?q=빌라드마리" target="_blank"
+              style="flex: 1; text-align: center; color: #ffc107; background-color: #fff; border: 1px solid #ffc107; padding: 0.375rem 0.75rem; font-size: 0.875rem; display: inline-block; line-height: 1.5; border-radius: 0.2rem; margin-right: 4px;">
+              카카오내비
+            </a>
+            <a href="https://tmap.life/6954e19a" target="_blank"
+              style="flex: 1; text-align: center; color: #007bff; background-color: #fff; border: 1px solid #007bff; padding: 0.375rem 0.75rem; font-size: 0.875rem; display: inline-block; line-height: 1.5; border-radius: 0.2rem;">
+              티맵
+            </a>
+          </div>
+
+          <br />
+          <div class="transport" style="width: 100%;">
+            <!-- 지하철 -->
+            <div class="t-section">
+              <div class="t-title">지하철</div>
+              <ul class="t-list">
+                <li>1호선: 부평역 하차 (부평역에서 도보 2분 거리)
+                  <ul class="t-sub">
+                    <li>북부광장 출구 도보 2분거리 (택시정류장에서 우측방향 12층 건물)</li>
+                  </ul>
+                </li>
+                <li>인천지하철: 부평역 하차
+                  <ul class="t-sub">
+                    <li>지하상가 11번 출구로 나오시면 오른편으로 보임 (노벨약국, 청아보석 방향)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <!-- 버스 -->
+            <div class="t-section">
+              <div class="t-title">버스</div>
+              <ul class="t-list">
+                <li>지선버스: 551, 558, 561, 574,585</li>
+                <li>간선버스: 1, 11, 12, 43, 45, 47</li>
+                <li>좌석버스: 302, 302B</li>
+                <li>시외버스: 88(부천), 737(수원/안산), 8414(안산), 9500(양재역)</li>
+              </ul>
+            </div>
+
+            <!-- 자가용 -->
+            <div class="t-section">
+              <div class="t-title">자가용</div>
+              <ul class="t-list">
+                <li>서울외곽순환도로 송내IC(부평)-> 직진(부평역 방향)
+                  <ul class="t-sub">
+                    <li>동소정사거리에서 우회전 굴다리 오거리에서 좌회전</li>
+                    <li>부평역 북부광장 진입 경인고속도로 부평IC 좌회전</li>
+                    <li>부평역 방향으로 직진 → 부평역 북부광장 진입</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
 
         <br /><br />
