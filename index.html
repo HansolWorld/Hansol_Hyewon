@@ -217,6 +217,10 @@
 </head>
 
 <body class="text-center">
+  <audio id="bgm" preload="auto" loop autoplay playsinline>
+    <source src="bgm/bgm.mp3" type="audio/mpeg">
+    <source src="bgm/bgm.ogg" type="audio/ogg">
+  </audio>
   <div class="top-div">
     <header class="inner cover cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <h1 class="wow fadeIn cover-heading"
@@ -824,6 +828,42 @@
     });
 
     infoWindow.open(map, marker);
+  </script>
+
+  <script>
+    (function () {
+      const audio = document.getElementById('bgm');
+      if (!audio) return;
+
+      audio.muted = false;
+      audio.volume = 1.0;
+
+      function tryPlay() {
+        return audio.play().catch(() => {});
+      }
+
+      // Try to play immediately
+      tryPlay();
+
+      // Resume on first user gesture if blocked
+      function resume() {
+        audio.muted = false;
+        tryPlay();
+        window.removeEventListener('touchstart', resume, { once: true });
+        window.removeEventListener('click', resume, { once: true });
+        window.removeEventListener('keydown', resume, { once: true });
+      }
+      ['touchstart', 'click', 'keydown'].forEach((ev) => {
+        window.addEventListener(ev, resume, { once: true });
+      });
+
+      // Resume when tab becomes visible again
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && audio.paused) {
+          tryPlay();
+        }
+      });
+    })();
   </script>
 
 </body>
