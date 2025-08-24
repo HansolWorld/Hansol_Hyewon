@@ -582,13 +582,14 @@
 
                   col.innerHTML = `
                     <div class="w-100">
-                      <div class="card w-100 shadow-sm border-0" style="min-height: 220px; border-radius: 12px; background-color: #ffffff;">
-                        <div class="card-body d-flex flex-column justify-content-between text-center px-3 py-4" style="min-height: 180px;">
-                          <p class="card-text mb-3" style="font-size: 1rem; color: #333; white-space: pre-wrap;">${msg.message}</p>
+                      <div class="card w-100 shadow-sm border-0" style="min-height: 220px; border-radius: 12px; background-color: #ffffff; position: relative;">
+                        <button type="button" class="close" aria-label="Delete" title="삭제" style="position: absolute; top: 8px; right: 12px; font-size: 1.25rem; opacity: 0.6;" onclick="confirmAndDeleteMessage('${msg.id}', '${msg.phone_suffix}')">&times;</button>
+                        <div class="card-body d-flex flex-column justify-content-between px-3 py-4" style="min-height: 180px;">
+                          <p class="card-text mb-3 text-left" style="font-size: 1rem; color: #333; white-space: pre-wrap; text-align: left;">${msg.message}</p>
                           <div class="mt-auto text-secondary small text-start">
                             <hr style="margin: 1rem 0 0.5rem 0; opacity: 0.2;" />
                             <div class="d-flex justify-content-between" style="font-size: 0.85rem;">
-                              <span>- ${msg.name} (${msg.phone_suffix})</span>
+                              <span>- ${msg.name}</span>
                               <span>${dateStr}</span>
                             </div>
                           </div>
@@ -605,10 +606,36 @@
             }
           }
 
+          function confirmAndDeleteMessage(id, expectedSuffix) {
+            const input = prompt('메시지를 삭제하려면 전화번호 뒷자리 4자리를 입력하세요.');
+            if (input === null) return;
+
+            if (String(input).trim() !== String(expectedSuffix)) {
+              alert('입력하신 번호가 일치하지 않습니다.');
+              return;
+            }
+
+            // 서버에서 비활성화(disable=true) 처리
+            supabaseClient
+              .from('messages')
+              .update({ disable: true })
+              .eq('id', id)
+              .then(({ error }) => {
+                if (error) {
+                  alert('삭제 실패: ' + error.message);
+                  return;
+                }
+                alert('메시지가 삭제되었습니다.');
+                // 목록 새로고침
+                loadMessages();
+              });
+          }
+
           async function loadMessages() {
             const { data, error } = await supabaseClient
               .from('messages')
               .select('*')
+              .neq('disable', true)
               .order('created_at', { ascending: false });
 
             const messageSection = document.getElementById('message-section');
