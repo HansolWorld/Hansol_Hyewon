@@ -366,25 +366,49 @@
 
       /* === Groom/ Bride 2-Column Layout (responsive) === */
       .section7 .orderBankInfo {
-        display: inline-block;
-        width: calc(50% - 8px);
+        display: block; /* 세로 배치 */
+        width: 100%;
         max-width: none;
-        margin: 12px 4px;
-        vertical-align: top;
+        margin: 12px 0; /* 위아래 간격만 */
+        vertical-align: initial;
       }
 
       /* Force two columns via flex wrapper */
       .bank-flex {
         display: flex;
+        flex-direction: column; /* 세로 스택 */
         gap: 12px;
         align-items: stretch;
-        max-width: 720px;
+        width: 100%;
         margin: 0 auto; /* center within page */
       }
       .bank-flex .orderBankInfo {
         flex: 1 1 0;
         width: auto; /* let flex handle width */
         margin: 12px 0; /* vertical spacing only inside flex */
+      }
+
+      /* === Side (Groom/Brid e) accordion header === */
+      .contBox .side-head {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: transparent;
+        border: 0;
+        padding: 6px 0 10px 0;
+        text-align: left;
+      }
+      .contBox .side-title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #222;
+      }
+      .contBox .side-chevron {
+        transition: transform 0.2s ease;
+      }
+      .contBox .side-head[aria-expanded="true"] .side-chevron {
+        transform: rotate(180deg);
       }
     </style>
   </head>
@@ -569,98 +593,109 @@
             신랑 신부에게 마음 전하기
           </p>
           <br />
-          <p class="section1-title section1-main">
-            저희 두 사람의 소중한 시작을<br />
-            함께해 주시는 모든 분들께 감사드리며,<br />
-            전해주시는 따뜻한 진심을 배워<br />
-            오래도록 행복하게 잘 살겠습니다.<br />
-          </p>
-          <br />
           <!-- ===== Bank info: groom & bride sides in flex columns ===== -->
           <div class="bank-flex">
-            <div class="contBox orderBankInfo groom active">
-              <div class="tit"><span>신랑측</span></div>
-
-              <div class="toggle" data-id="bank-0">
-                <div class="info">
-                  <div class="bank">
-                    <span>신한은행</span><em>110-418-610840</em>
+            <div class="contBox orderBankInfo groom active w-100">
+              <button
+                class="side-head"
+                data-toggle="collapse"
+                data-target="#side-groom"
+                aria-expanded="true"
+                aria-controls="side-groom"
+              >
+                <span class="side-title">신랑측</span>
+                <span class="side-chevron">▾</span>
+              </button>
+              <div id="side-groom" class="collapse show">
+                <div class="toggle" data-id="bank-0">
+                  <div class="info">
+                    <div class="bank">
+                      <span>신한은행</span><em>110-418-610840</em>
+                    </div>
+                    <div class="name">
+                      <p>어머니 <em>김옥경</em></p>
+                    </div>
                   </div>
-                  <div class="name">
-                    <p>어머니 <em>김옥경</em></p>
+                  <div class="btn">
+                    <button
+                      class="no2 bankCopy"
+                      data-clipboard-text="신한은행 110-418-610840 김옥경"
+                      style="background: #f8f9fa; color: #000"
+                    >
+                      <span>계좌번호 복사</span>
+                    </button>
                   </div>
                 </div>
-                <div class="btn">
-                  <button
-                    class="no2 bankCopy"
-                    data-clipboard-text="신한은행 110-418-610840 김옥경"
-                    style="background: #f8f9fa"
-                  >
-                    <span>계좌번호 복사</span>
-                  </button>
-                </div>
-              </div>
-
-              <div class="toggle" data-id="bank-1">
-                <div class="info">
-                  <div class="bank">
-                    <span>카카오뱅크</span><em>3333-34-9630149</em>
+                <div class="toggle" data-id="bank-1">
+                  <div class="info">
+                    <div class="bank">
+                      <span>카카오뱅크</span><em>3333-34-9630149</em>
+                    </div>
+                    <div class="name">
+                      <p>신랑 <em>엄한솔</em></p>
+                    </div>
                   </div>
-                  <div class="name">
-                    <p>신랑 <em>엄한솔</em></p>
+                  <div class="btn">
+                    <button
+                      class="no2 bankCopy"
+                      data-clipboard-text="카카오뱅크 3333-34-9630149 엄한솔"
+                      style="background: #f8f9fa; color: #000"
+                    >
+                      <span>계좌번호 복사</span>
+                    </button>
                   </div>
-                </div>
-                <div class="btn">
-                  <button
-                    class="no2 bankCopy"
-                    data-clipboard-text="카카오뱅크 3333-34-9630149 엄한솔"
-                    style="background: #f8f9fa"
-                  >
-                    <span>계좌번호 복사</span>
-                  </button>
                 </div>
               </div>
             </div>
             <div class="contBox orderBankInfo bride active">
-              <div class="tit"><span>신부측</span></div>
-
-              <div class="toggle" data-id="bank-2">
-                <div class="info">
-                  <div class="bank">
-                    <span>우리은행</span><em>1002-735-704622</em>
+              <button
+                class="side-head"
+                data-toggle="collapse"
+                data-target="#side-bride"
+                aria-expanded="true"
+                aria-controls="side-bride"
+              >
+                <span class="side-title">신부측</span>
+                <span class="side-chevron">▾</span>
+              </button>
+              <div id="side-bride" class="collapse show">
+                <div class="toggle" data-id="bank-2">
+                  <div class="info">
+                    <div class="bank">
+                      <span>우리은행</span><em>1002-735-704622</em>
+                    </div>
+                    <div class="name">
+                      <p>어머니 <em>조선희</em></p>
+                    </div>
                   </div>
-                  <div class="name">
-                    <p>어머니 <em>조선희</em></p>
+                  <div class="btn">
+                    <button
+                      class="no2 bankCopy"
+                      data-clipboard-text="우리은행 1002-735-704622 조선희"
+                      style="background: #f8f9fa; color: #000"
+                    >
+                      <span>계좌번호 복사</span>
+                    </button>
                   </div>
                 </div>
-                <div class="btn">
-                  <button
-                    class="no2 bankCopy"
-                    data-clipboard-text="우리은행 1002-735-704622 조선희"
-                    style="background: #f8f9fa"
-                  >
-                    <span>계좌번호 복사</span>
-                  </button>
-                </div>
-              </div>
-
-              <div class="toggle" data-id="bank-3">
-                <div class="info">
-                  <div class="bank">
-                    <span>우리은행</span><em>1002-250-724771</em>
+                <div class="toggle" data-id="bank-3">
+                  <div class="info">
+                    <div class="bank">
+                      <span>우리은행</span><em>1002-250-724771</em>
+                    </div>
+                    <div class="name">
+                      <p>신부 <em>이혜원</em></p>
+                    </div>
                   </div>
-                  <div class="name">
-                    <p>신부 <em>이혜원</em></p>
+                  <div class="btn">
+                    <button
+                      class="no2 bankCopy"
+                      data-clipboard-text="우리은행 1002-250-724771 이혜원"
+                      style="background: #f8f9fa; color: #000"
+                    >
+                      <span>계좌번호 복사</span>
+                    </button>
                   </div>
-                </div>
-                <div class="btn">
-                  <button
-                    class="no2 bankCopy"
-                    data-clipboard-text="우리은행 1002-250-724771 이혜원"
-                    style="background: #f8f9fa"
-                  >
-                    <span>계좌번호 복사</span>
-                  </button>
                 </div>
               </div>
             </div>
@@ -682,7 +717,7 @@
         <br /><br />
         <p class="section5-title section5-main">Date</p>
         <div
-          class="card mt-4 w-100 d-flex w-100 h-100 p-3 mx-auto flex-column"
+          class="card mt-4 w-100 d-flex h-100 p-3 mx-auto flex-column"
           style="max-width: 720px; margin: 0 auto; padding: 1rem"
         >
           <br />
