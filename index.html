@@ -192,6 +192,37 @@
       .transport .t-sub li {
         text-align: left;
       }
+
+      /* ===== Share buttons (Kakao / Link Copy) ===== */
+      .kakao-wrap {
+        max-width: 720px;
+        margin: 8px auto 0;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        align-items: center;
+      }
+      .btn-kakao {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid #e9ecef;
+        background: #fff;
+        cursor: pointer;
+      }
+      .btn-kakao span {
+        display: none;
+      } /* 아이콘만 보이게 */
+      .btn-kakao svg {
+        width: 22px;
+        height: 22px;
+      }
+      .btn-kakao:hover {
+        background: #f8f9fa;
+      }
     </style>
     <!-- Custom styles for this template -->
     <link href="css/cover.css" rel="stylesheet" />
@@ -709,7 +740,7 @@
               const text = btn.getAttribute("data-clipboard-text") || "";
               navigator.clipboard
                 .writeText(text)
-                .then(() => alert("복사되었습니다: " + text))
+                .then(() => alert("복사되었습니다:\n" + text))
                 .catch((err) => alert("복사 실패: " + err));
             });
           </script>
@@ -1153,8 +1184,44 @@
           <br /><br />
           <br /><br />
         </div>
+
         <footer class="pt-5 text-muted text-center text-small section8">
+          <!-- Share buttons: Kakao + Copy Link (icons only) -->
           <p class="mb-1">© 2025-10-19 Hansol, Heywon</p>
+          <div class="kakao-wrap">
+            <div
+              class="btn-kakao"
+              id="btnKakaoShare"
+              title="카카오톡 공유"
+              style="background: #fee500"
+            >
+              <svg
+                id="Bold"
+                enable-background="new 0 0 24 24"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#000"
+              >
+                <path d="m9.462 9.306-.692 1.951h1.383z"></path>
+                <path
+                  d="m12 1c-6.627 0-12 4.208-12 9.399 0 3.356 2.246 6.301 5.625 7.963-1.299 4.45-1.333 4.47-1.113 4.599.276.161.634-.005 5.357-3.311.692.097 1.404.148 2.131.148 6.627 0 12-4.208 12-9.399s-5.373-9.399-12-9.399zm-5.942 12.023c0 .362-.311.657-.692.657s-.692-.295-.692-.657v-4.086h-1.08c-.375 0-.679-.302-.679-.673s.303-.674.678-.674h3.545c.375 0 .679.302.679.673s-.305.674-.679.674h-1.08zm5.378.648c-.72 0-.587-.565-.919-1.195h-2.111c-.329.625-.2 1.195-.919 1.195-.693.001-.815-.421-.604-1.071l1.656-4.33c.117-.33.471-.669.922-.679.452.01.807.349.923.679 1.093 3.39 2.654 5.402 1.052 5.401zm3.939-.092h-2.221c-1.159 0-.454-1.565-.663-5.301 0-.379.317-.688.707-.688s.707.308.707.688v4.04h1.471c.366 0 .663.283.663.63-.001.348-.298.631-.664.631zm5.419-.518c-.025.181-.122 .344-.269 .454-.955 .721-1.661-1.381-2.593-2.271l-.24 .239v1.5c0 .38-.31 .688-.693 .688-.382 0-.692-.308-.692-.688v-4.705c0-.379 .31-.688 .692-.688s.692 .308 .692 .688v1.478c1.277-.958 1.985-2.67 2.792-1.869.792 .786-.848 1.474-1.527 2.422 1.604 2.212 1.909 2.267 1.838 2.752z"
+                ></path>
+              </svg>
+            </div>
+            <div class="btn-kakao" id="btnCopyLink" title="링크주소 복사">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="#000"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5-1.5a2 2 0 11-2.828-2.828l3-3z"
+                  clip-rule="evenodd"
+                ></path>
+              </svg>
+            </div>
+          </div>
           <br /><br />
           <br /><br />
         </footer>
@@ -1305,4 +1372,58 @@
       });
     </script>
   </body>
+  <script>
+    // 링크 복사
+    document
+      .getElementById("btnCopyLink")
+      ?.addEventListener("click", function () {
+        const url = window.location.href;
+        navigator.clipboard
+          .writeText(url)
+          .then(() => alert("복사되었습니다:\n" + url))
+          .catch((err) => alert("복사 실패: " + err));
+      });
+
+    // 카카오톡 공유
+    document
+      .getElementById("btnKakaoShare")
+      ?.addEventListener("click", function () {
+        if (window.Kakao && Kakao.isInitialized && Kakao.isInitialized()) {
+          Kakao.Share.sendDefault({
+            objectType: "feed",
+            content: {
+              title: document.title,
+              description: "초대합니다 · 빌라드마리 웨딩홀",
+              imageUrl:
+                "https://hansolworld.github.io/Hansol_Hyewon/img/header.jpeg",
+              link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href,
+              },
+            },
+            buttons: [
+              {
+                title: "모바일 청첩장 열기",
+                link: {
+                  mobileWebUrl: window.location.href,
+                  webUrl: window.location.href,
+                },
+              },
+            ],
+          });
+          return;
+        }
+        if (navigator.share) {
+          navigator
+            .share({
+              title: document.title,
+              text: "초대합니다",
+              url: window.location.href,
+            })
+            .catch(() => {});
+          return;
+        }
+        alert("카카오 SDK가 설정되지 않아 기본 공유 시트를 사용합니다.");
+      });
+  </script>
 </html>
